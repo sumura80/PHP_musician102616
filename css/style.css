@@ -1,0 +1,110 @@
+*{
+	margin:0;
+	padding:0;
+	 
+}
+
+
+body{
+	padding:2%;
+	font-family: 'arial', 'Tomaho',  sans-serif;
+	background-color: #ffebcd;
+
+}
+table{
+	margin: 0 auto;
+}
+
+.search_title  {
+	background: #add8e6;
+	width:80%;
+	text-align: center;
+	margin: 10px auto;
+	padding: 20px;
+}
+
+.search_tbl th,td{
+	text-align: center;
+	background: #eee8aa;
+	height:auto;
+	padding-right: 20px;
+
+	
+}
+ 
+
+.search_tbl{
+	background-color: grey;
+	margin:30px auto;
+	width:80%;
+	text-align: center;
+	height:auto;
+	padding:20px;
+	border-radius:6px;
+}
+
+.price_input{
+	font-size:25px;
+	padding:0 20px;
+
+}
+input{
+	 margin:10px;
+	height:auto;
+	border-radius: 3px;
+}
+
+.btn{
+	width:200px;
+	height:auto;
+
+}
+ 
+ caption{
+ 	font-size:20px;
+ 	font-weight: bold;
+ }
+
+
+.confirm{
+ 	height:50px;
+ 	padding-top:10px;
+ 	text-align: center;
+
+ }
+
+ .inqury_form{
+ 	width:400px;
+ 	height:50px;
+ 	font-size:20px;
+ }
+ 
+ .contact_content , .reconfirm {
+ background-color: #e0ffff;
+ font-size:20px;
+ margin-top:-10px ;
+ border-radius: 6px;
+ padding-left:20px;
+ padding-bottom:10px;
+ height:auto;
+
+  } 
+ 
+ .page-header{
+ 	padding-top: 0px;
+ 	margin-top: -20px;
+
+ }
+
+
+ .page-header p{
+font-size:18px; 	
+
+ }
+
+.reconfirm{
+ padding-top:20px;
+ padding-bottom: 0px;
+}
+
+ 

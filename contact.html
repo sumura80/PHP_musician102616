@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>お問い合わせフォーム</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+<body>
+
+
+<div class="page-header well">
+<h2>お問い合わせ内容</h2>
+<p>下記のフォームにご記入ください。</p>
+</div><!--END  page-header -->
+
+
+<form name="contact_form" action="confirm.php" method="POST" class="contact_content">
+<p>お名前（必須）: <input type="text" name="handle" required /></p>
+<p>メールアドレス（必須）: <input type="email" name="email" required /></p>
+
+ 
+<p>性別:<input type="radio" name="gender" value="女性"  checked="checked" />女性
+<input type="radio" name="gender" value="男性" />男性</p>
+
+<p>年齢:
+    <select name="age">
+        <option value="10+">10-19歳</option>
+        <option value="20+">20-29歳</option>
+        <option value="30+">30-39歳</option>
+        <option value="40+">40-49歳</option>
+        <option value="50+">50-59歳</option>
+        <option value="60+">60歳以上</option>
+    </select>
+</p>
+
+<p>お好きなジャンル: 
+<input type="checkbox" name="genre[]" value="pop">ポップ
+<input type="checkbox" name="genre[]" value="classic">クラシック
+<input type="checkbox" name="genre[]" value="jazz">ジャズ
+<input type="checkbox" name="genre[]" value="enka">演歌
+<input type="checkbox" name="genre[]" value="rock">ロック
+<input type="checkbox" name="genre[]" value="anime">アニメ
+<input type="checkbox" name="genre[]" value="others">その他
+</p>
+
+　
+  <p>ご意見・ご感想ご質問をご記入ください。</p>
+<textarea name="opinion" rows="5" cols="30" required></textarea>
+ 
+　
+<br/>
+<input type="button" class="btn btn-defalut" onclick="location.href='index.php'" value="検索画面に戻る">
+<input type="submit" value="送信" class="btn btn-info">
+</form>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
