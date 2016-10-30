@@ -1,4 +1,4 @@
-<?php error_reporting( E_ALL ^ E_NOTICE ); ?><!--注意喚起程度のエラーは非表示 -->
+﻿<?php error_reporting( E_ALL ^ E_NOTICE ); ?><!--注意喚起程度のエラーは非表示 -->
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -27,7 +27,7 @@
 
 <?php
 //MySQLへの接続
-  $pdo = new PDO("mysql:host=mysql605.db.sakura.ne.jp; dbname=polyglot80_musicians; charset=utf8", "polyglot80", "sumura80", array( PDO::ATTR_EMULATE_PREPARES => false) );
+  $pdo = new PDO("mysql:host=localhost; dbname=musicians; charset=utf8", "root", "", array( PDO::ATTR_EMULATE_PREPARES => false) );
 
 //ページしたにあるFORMにあるinput　name=cmd と value=reserveに該当するform内容ならば、以下の自作SQLを実行する。
 if( $_REQUEST["cmd"] == "reserve"){

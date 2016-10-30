@@ -67,7 +67,7 @@
 <?php
 //MySQLへの接続
 if( $_REQUEST["cmd"] == "search" ){
-  $pdo = new PDO("mysql:host=mysql605.db.sakura.ne.jp; dbname=polyglot80_musicians; charset=utf8", "polyglot80", "sumura80", array( PDO::ATTR_EMULATE_PREPARES => false ) );
+  $pdo = new PDO("mysql:host=localhost; dbname=musicians; charset=utf8", "root", "", array( PDO::ATTR_EMULATE_PREPARES => false ) );
   $sql = "select * from artists_intro where 1 = 1 ";
   $condition = array();
 
