@@ -33,8 +33,9 @@
 <p>メールアドレス（必須）: <input type="email" name="email" required /></p>
 
  
-<p>性別:<input type="radio" name="gender" value="女性"  checked="checked" />女性
-<input type="radio" name="gender" value="男性" />男性</p>
+ 
+<p>性別:<input type="radio" name="gender" value="女性" id="female" checked="checked" /><label for="female" style="cursor: pointer; font-weight:lighter">女性
+</label><input type="radio" name="gender" value="男性" id="male" /><label for="male" style="cursor: pointer; font-weight:lighter;">男性</label></p>
 
 <p>年齢:
     <select name="age">
@@ -48,13 +49,13 @@
 </p>
 
 <p>お好きなジャンル: 
-<input type="checkbox" name="genre[]" value="pop">ポップ
-<input type="checkbox" name="genre[]" value="classic">クラシック
-<input type="checkbox" name="genre[]" value="jazz">ジャズ
-<input type="checkbox" name="genre[]" value="enka">演歌
-<input type="checkbox" name="genre[]" value="rock">ロック
-<input type="checkbox" name="genre[]" value="anime">アニメ
-<input type="checkbox" name="genre[]" value="others">その他
+<input type="checkbox" name="genre[]" value="pop" id="pop"><label for="pop" style="cursor: pointer; font-weight:lighter;">ポップ</label>
+<input type="checkbox" name="genre[]" value="classic" id="classic"><label for="classic" style="cursor: pointer; font-weight:lighter;">クラシック</label>
+<input type="checkbox" name="genre[]" value="jazz" id="jazz"><label for="jazz" style="cursor: pointer; font-weight:lighter;">ジャズ</label>
+<input type="checkbox" name="genre[]" value="enka" id="enka"><label for="enka" style="cursor: pointer; font-weight:lighter;">演歌</label>
+<input type="checkbox" name="genre[]" value="rock" id="rock"><label for="rock" style="cursor: pointer; font-weight:lighter;">ロック</label>
+<input type="checkbox" name="genre[]" value="anime" id="anime"><label for="anime" style="cursor: pointer; font-weight:lighter;">アニメ</label>
+<input type="checkbox" name="genre[]" value="others" id="others"><label for="others" style="cursor: pointer; font-weight:lighter;">その他</label>
 </p>
 
 　
