@@ -27,7 +27,7 @@
 <p>下記のフォームにご記入ください。</p>
 </div><!--END  page-header -->
 
-
+<!-- お問い合わせ内容を入力後確認画面のConfirm.phpページにnameデータを保持し遷移する。-->
 <form name="contact_form" action="confirm.php" method="POST" class="contact_content">
 <p>お名前（必須）: <input type="text" name="handle" required /></p>
 <p>メールアドレス（必須）: <input type="email" name="email" required /></p>
@@ -61,7 +61,7 @@
   <p>ご意見・ご感想ご質問をご記入ください。</p>
 <textarea name="opinion" rows="5" cols="30" required></textarea>
  
-　
+　<!--submitを押下すると次の確認画面に移動。-->
 <br/>
 <input type="button" class="btn btn-defalut" onclick="location.href='index.php'" value="検索画面に戻る">
 <input type="submit" value="送信" class="btn btn-info">

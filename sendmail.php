@@ -1,6 +1,6 @@
 <?php error_reporting( E_ALL ^ E_NOTICE ); //注意喚起程度のエラーは非表示  
 	session_start();
-
+//Sessionを使いデータを使えるようにしているので、ページの頭にSession　startと記述。
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -27,9 +27,13 @@
   
 
 <?php
+//言語とデータ交換方式を選択。
 	mb_language("ja");
 	mb_internal_encoding("UTF-8");
 	//UTFは必ず大文字にすること
+
+	//下記では、変数に内容を代入。Sessionで持ってきたデータをメールの本文にいれるためのcontentsに代入。
+	//. "\n" .で改行を結合し、送信フォームを整えている。
 	$from ="From:";
 	$to = 'susumu@polyglot80.sakura.ne.jp';
 	$subject = 'お問い合わせ内容';
@@ -40,9 +44,9 @@ $contents =
 	  '年齢：' .$_SESSION['age']. "\n" .
 	  'ジャンル：' . implode(',', $_SESSION['genre']). "\n".
 	  '問い合わせ：' .$_SESSION['opinion']. "\n";
-
+//上で変数を作成したので、mb_send_mailで実行し、同時にresult変数に代入。
 	$result = mb_send_mail($to, $subject, $contents, $from);
-	
+	//mb_send_mailで実行が真（実行されれば）なら下記の内容をprintで表示する。実際のサーバー環境ではメール送信とデータベースへの格納が成功。
 	if($result) {
 		print ('<font size=5px; >');
 		print 'ご送信ありがとうございました。';
@@ -52,7 +56,7 @@ $contents =
 		'メール送信に失敗しました。';
 	}
 
- 
+ //Sessionは最後に必ず	destroyで終了する。
 session_destroy();
 
 

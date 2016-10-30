@@ -26,15 +26,17 @@
  <h1 class="search_title">ミュージシャンの予約</h1>
 
 <?php
-  $pdo = new PDO("mysql:host=localhost; dbname=musicians; charset=utf8", "root", "", array( PDO::ATTR_EMULATE_PREPARES => false) );
+//MySQLへの接続
+  $pdo = new PDO("mysql:host=mysql605.db.sakura.ne.jp; dbname=polyglot80_musicians; charset=utf8", "polyglot80", "sumura80", array( PDO::ATTR_EMULATE_PREPARES => false) );
 
-
+//ページしたにあるFORMにあるinput　name=cmd と value=reserveに該当するform内容ならば、以下の自作SQLを実行する。
 if( $_REQUEST["cmd"] == "reserve"){
   $sql = <<< SQL
     insert into reservation( artists_id, last_name, first_name,  reserve_date )
       values ( :artists_id, :last_name, :first_name,  :reserve_date) 
 SQL;
 
+//index.phpの選択画面で選んだものをMSQLで使える配列用に、コロンのプレースホルダ―にセット。
   $condition = array(
       ":artists_id" => $_REQUEST["id"],
       ":last_name" => $_REQUEST["last_name"],
@@ -42,19 +44,20 @@ SQL;
       ":reserve_date" => "{$_REQUEST["year"]}-{$_REQUEST["month"]}-{$_REQUEST["day"]}",
       );
 
+//SQLの実行。IF分を用いて、SQLのが真なら（行が送り先がないので、予約確定が実行されれば）下記のメッセージを表示。　検索画面にもどる項目も用意。
     $statement = $pdo->prepare( $sql );
     $result = $statement->execute( $condition );
     if( $result ){
       print ('<center><font size=5px; >');
       print ("ご予約ありがとうございました。 <br /> 24時間以内に返信いたしますので、しばらくお待ちください。");
       print ('</center></font>');
-      print ('<center><p><a href="index1.php"  class="btn btn-warning"  style="margin-top:20px;">検索画面にもどる</a></p></center>');
+      print ('<center><p><a href="index.php"  class="btn btn-warning"  style="margin-top:20px;">検索画面にもどる</a></p></center>');　//検索画面に戻るボタンも追加。
      ;
   }
 
 
 }
-
+//上記で自作関数で作ったSQLで、今回選択したものが、一つだけ表示されるようにFETCHで抽出。検索画面では、FetchAll.
 $sql = "select * from artists_intro where id = :id ";
 $condition = array( ":id" => $_REQUEST["id"]);
 $statement = $pdo->prepare( $sql );
@@ -72,13 +75,13 @@ $result = $statement->fetch();
   <th>料金/1h</th>
   <th>楽器名</th>
   <th>その他</th>
- 
-   
   </tr>
 
+
+<!--下のテーブルでは、今回選んだものだけをサニタイジングを加え表示 -->
 <tr>
   <td>
-    <img src="pics/<?php print( htmlspecialchars($result["id"], ENT_QUOTES) ); ?>.jpg" />
+    <img src="pics/<?php print( htmlspecialchars($result["id"], ENT_QUOTES) ); ?>.jpg" style="padding:20px 0px 20px 20px;"/>
   </td>
 
    <td>
@@ -104,7 +107,8 @@ $result = $statement->fetch();
 
 
 </table>
-
+<!-- 予約項目を入力。actionでの送り先をこのページにすることで、データを表示できる。
+各項目でえらんだnameのデータが送信画面に送られる。-->
 <form name="reserve_form" method="POST" action="detail.php">
     <input type="hidden" name="cmd" value="reserve">
     <input type="hidden" name="id" value="<?php print ( htmlspecialchars($_REQUEST["id"]) );?>" >
@@ -129,8 +133,9 @@ $result = $statement->fetch();
 </tr>
 </table>
 
+<!--ボタン３つ　予約画面に前ページに戻る。　予約確定でaction先はない。　また詳細を問い合わせるボタンでは、問い合わせページに移動できる。 -->
 <div class="confirm">
-<input class="btn btn-success " value="検索画面に戻る" onClick="history.back();">
+<input class="btn btn-success " value="予約画面に戻る" onClick="history.back();">
 <input type="submit" value="予約確定" class="btn btn-danger" >
 </div>
 

@@ -31,7 +31,7 @@
 
 <div class="reconfirm">
 <?php
-//名前の表示
+//名前を入力画面のnameから取り出しの表示
 print '<p>お名前:' .htmlspecialchars($_REQUEST['handle']). '</p>' ;
 //メールアドレスの表示 
 print '<p>メールアドレス:' .htmlspecialchars($_REQUEST['email']). '</p>';
@@ -81,7 +81,7 @@ switch ($_REQUEST['age']){
 <br />
 <p style="font-size: 28px;">この内容で送信してもよろしいでしょうか？</p><br/>
 </div><!-- End Reconfirm-->
-
+<!-- localhost環境ではエラーになるが、サーバー上では送信終了画面に遷移する。-->
 <br/>
 <button class="btn btn-dfault" onClick="history.back();" style="margin-right:10px">修正する</button> 
 <button class="btn btn-info" onclick="location.href='sendmail.php' ">送信</button>

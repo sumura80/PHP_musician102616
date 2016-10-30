@@ -1,4 +1,4 @@
-<?php error_reporting( E_ALL ^ E_NOTICE ); ?><!--注意喚起程度のエラーは非表示 -->
+﻿<?php error_reporting( E_ALL ^ E_NOTICE ); ?><!--注意喚起程度のエラーは非表示 -->
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -28,7 +28,7 @@
  <p style="font-size:20px">1000円から1万円までのミュージシャンをご覧いただけます。</p>
 </div>
 
-<!--検索項目のFORMを作成-->
+<!--検索項目のFORMを作成　送信先をこのページにすることで、検索した内容が表示されるようになっている。-->
 <form name="search_form" action="index.php" method="post" >
 <input type="hidden" name="cmd" value="search" />
 
@@ -65,26 +65,29 @@
 <!--END　検索項目のFORM-->
 
 <?php
+//MySQLへの接続
 if( $_REQUEST["cmd"] == "search" ){
-  $pdo = new PDO("mysql:host=localhost; dbname=polyglot80_musicians; charset=utf8", "root", "", array( PDO::ATTR_EMULATE_PREPARES => false ) );
+  $pdo = new PDO("mysql:host=mysql605.db.sakura.ne.jp; dbname=polyglot80_musicians; charset=utf8", "polyglot80", "sumura80", array( PDO::ATTR_EMULATE_PREPARES => false ) );
   $sql = "select * from artists_intro where 1 = 1 ";
   $condition = array();
 
+//価格を入力する欄で、金額が入力されている際には、SQLに最低金額として式を追加。また最低金額としてSQLで使われるConditioinという配列に追加。
   if( !empty( $_REQUEST["price_min"] ) ){
     $sql = $sql . " and price >= :price_min ";
     $condition[":price_min"] = $_REQUEST["price_min"];
   }
-
+//価格を入力する欄で、金額が入力されている際には、SQLに最高金額として式を追加。また最高金額としてSQLで使われるConditioinという配列に追加。
   if( !empty( $_REQUEST["price_max"] ) ){
     $sql = $sql . " and price <= :price_max ";
     $condition[":price_max"] = $_REQUEST["price_max"];
   }
 
+//楽器名も入力でき、その単語を含むものをLIKE%%で検索できる。　入力した単語がCondition配列に追加される。
   if( !empty( $_REQUEST["instruments"] ) ){
     $sql = $sql . " and instruments like :instruments ";
     $condition[":instruments"] = "%{$_REQUEST["instruments"]}%";
   }
-
+//prepareでSQL式を用意し、Executeで実行。Condition配列で出てきたものをFetchallですべて抽出しまとめたものをResultに代入。
     $statement = $pdo->prepare( $sql );
     $statement->execute( $condition );
   $results = $statement->fetchAll();
@@ -101,12 +104,14 @@ if( $_REQUEST["cmd"] == "search" ){
   <th>ご予約</th>
 </tr>
   <?php
+  //Foreachを使い、すべて取り出し resultにひとつづつとして格納。
       foreach( $results as $result){
   ?>
-
+<!-- Foreachで抽出したResultをそれぞれの項目でPHPを使い取り出し、画面に表示。
+写真の result["id"]なら一つ目の写真、その他も一つ目を表示して、終わり次第二つ目に格納されているものを表示、全て表示。-->
     <tr>
        <td>
-         <img src="pics/<?php print( htmlspecialchars($result["id"]) );?>.jpg" />
+         <img src="pics/<?php print( htmlspecialchars($result["id"]) );?>.jpg" style="padding:20px 0px 20px 20px;"/>
 
        </td>
 
@@ -124,8 +129,8 @@ if( $_REQUEST["cmd"] == "search" ){
          <td>
          <?php print( htmlspecialchars($result["memo"], ENT_QUOTES)); ?>
        </td>
-
-       <td><a href="detail.php?id=<?php print( $result["id"] ); ?>">予約</a>
+<!-- 予約ボタンを押下すると、登録画面のdetail.phpに飛び、押下したボタンに該当するIDも一緒に送り、何が選択されたのかがわかる。-->
+       <td><a href="detail.php?id=<?php print( $result["id"] ); ?>" class="btn btn-danger btn-sm" style="width: 100px; margin-left:20px;">予約</a>
        </td>
 </tr>
     　
